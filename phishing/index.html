@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>التصيّد الاحتيالي — دليل مبسّط</title>
+  <!-- English comments: Using Google Font 'Tajawal' for Arabic readability -->
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <style>
+    /* English: Reset and base styles */
+    :root{
+      --accent: #0b66a0; /* deep blue */
+      --accent-2: #2b9bd7; /* lighter blue */
+      --bg: #f7fbff; /* soft background */
+      --card: #ffffff;
+      --muted: #6b7280;
+      --radius: 14px;
+      --max-width: 1000px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%;font-family:'Tajawal',system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial;background:var(--bg);color:#0f1724}
+    a{color:var(--accent)}
+
+    /* English: container centered with responsive padding */
+    .wrap{max-width:var(--max-width);margin:28px auto;padding:18px}
+
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:white;font-weight:800;box-shadow:0 6px 18px rgba(11,102,160,0.18)}
+    .title{line-height:1}
+    .title h1{font-size:20px}
+    .title p{font-size:13px;color:var(--muted)}
+
+    /* English: simple nav */
+    nav{display:flex;gap:8px}
+    .btn{background:var(--card);border-radius:10px;padding:8px 12px;border:1px solid rgba(15,23,36,0.06);font-weight:600;cursor:pointer}
+
+    /* English: main grid layout. Sidebar floats on larger screens */
+    .main{display:grid;grid-template-columns:1fr;gap:18px}
+    .card{background:var(--card);border-radius:var(--radius);padding:18px;box-shadow:0 6px 20px rgba(12,40,70,0.06)}
+    article h2{margin-bottom:10px;color:var(--accent)}
+    article p{margin-bottom:12px;line-height:1.6;color:#111827}
+
+    /* English: glossary card special styling */
+    .glossary{border-left:4px solid var(--accent);padding:14px}
+    .term{margin-bottom:10px}
+    .term b{display:block}
+
+    /* English: responsive two-column on wider screens */
+    @media(min-width:880px){
+      .main{grid-template-columns:1fr 320px}
+      .sidebar{position:sticky;top:22px;height:fit-content}
+    }
+
+    /* English: small utilities */
+    .lead{font-size:15px;color:#0f1724;opacity:.9;margin-bottom:8px}
+    .muted{color:var(--muted);font-size:13px}
+    .pill{display:inline-block;background:linear-gradient(90deg,var(--accent)10%,transparent 120%);color:white;padding:6px 10px;border-radius:999px;font-weight:700}
+
+    /* English: table of contents styles */
+    .toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+    .toc a{font-size:13px;padding:8px;border-radius:8px;background:linear-gradient(180deg,rgba(255,255,255,0.6),rgba(255,255,255,0.9));border:1px solid rgba(11,102,160,0.06)}
+
+    /* English: code-like box for quick tips */
+    .tip{background:linear-gradient(180deg,#f0fbff,#ffffff);padding:12px;border-radius:10px;border:1px dashed rgba(11,102,160,0.12);margin:10px 0}
+
+    /* English: footer */
+    footer{margin-top:18px;text-align:center;color:var(--muted);font-size:13px;padding:18px}
+
+    /* English: mobile adjustments */
+    @media(max-width:480px){
+      .title h1{font-size:18px}
+      .logo{width:48px;height:48px}
+    }
+
+    /* English: glossary collapsible for mobile */
+    .glossary-toggle{display:none}
+    @media(max-width:880px){
+      .glossary-toggle{display:block;margin-bottom:10px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">ت</div>
+        <div class="title">
+          <h1>التصيّد الاحتيالي — دليل مبسّط</h1>
+          <p class="muted">فهم، رصد، والوقاية — نسخة مناسبة للهواتف والحواسيب</p>
+        </div>
+      </div>
+      <nav>
+        <button class="btn" onclick="window.print()">طباعة / حفظ PDF</button>
+      </nav>
+    </header>
+
+    <main class="main">
+      <section>
+        <article class="card" id="printable">
+          <p class="lead">التصيّد الاحتيالي (Phishing) هو خداع إلكتروني يهدف للحصول على معلومات حساسة عبر رسائل ومواقع تبدو شرعية. هذا الدليل يشرح أصله، أنواعه، العلامات، وكيف تحمي نفسك والمؤسسة.</p>
+
+          <div class="toc">
+            <a href="#origin">أصل التصيّد</a>
+            <a href="#how">كيف يعمل</a>
+            <a href="#types">أنواعه</a>
+            <a href="#tools">أدوات المهاجم</a>
+            <a href="#signs">علامات</a>
+            <a href="#prevent">الوقاية</a>
+            <a href="#victim">ماذا تفعل لو كنت ضحية</a>
+            <a href="#gloss">القاموس</a>
+          </div>
+
+          <h2 id="origin">1 — أصل التصيّد</h2>
+          <p>الفكرة الأساسية للتصيد ليست إلكترونية بالضرورة — الاحتيال عبر التزييف وادعاء الانتماء لجهة موثوقة موجود منذ قديم الزمن. مع ظهور البريد الإلكتروني والويب، تطورت الوسائل وأصبحت البيانات الرقمية ذات قيمة اقتصادية عالية، ما جعل التصيّد أحد أكثر طرق الاحتيال انتشارًا.</p>
+
+          <h2 id="how">2 — كيف يعمل التصيّد (بشكل عام وآمن)</h2>
+          <p>المهاجم يرسل رسالة تبدو وكأنها من جهة موثوقة، تدفع المتلقي للضغط على رابط أو إدخال معلومات في نموذج. الهدف: الحصول على بيانات الدخول، أو الحصول على معلومات شخصية، أو دفع الضحية لتحميل ملف خبيث.</p>
+
+          <h2 id="types">3 — أنواع التصيّد الشائعة</h2>
+          <p>هناك عدة طرق للتصيّد، منها البريد الإلكتروني (الأكثر شيوعًا)، الرسائل النصية (SMiShing)، رسائل تطبيقات الدردشة، المكالمات الهاتفية (Vishing)، والتصيّد الموجّه مثل Spear Phishing وWhaling.</p>
+
+          <h2 id="tools">4 — أدوات وأساليب المهاجم (بشكل عام)</h2>
+          <p>المهاجمون يستخدمون قوالب رسائل، نطاقات متقاربة من النطاق الأصلي، روابط مختصرة، ومرفقات تبدو شرعية. العمل يتركز على الإقناع أكثر من التعقيد التقني.</p>
+
+          <div class="tip">
+            <strong>نصيحة سريعة:</strong> إن شعرت بالعجلة أو الخوف نتيجة رسالةٍ ما — توقف وفكر قبل الضغط. المشاعر هي التي يستغلها المحتالون.
+          </div>
+
+          <h2 id="signs">5 — علامات الرسالة المخادعة</h2>
+          <p>اطّلع على قائمة سريعة: مطالبة عاجلة، طلب معلومات حساسة عبر رابط، عنوان مرسل غريب، روابط مختصرة، أخطاء لغوية، أو مرفقات غير متوقعة.</p>
+
+          <h2 id="prevent">6 — كيفية الوقاية (نصائح عملية)</h2>
+          <p><strong>للمستخدمين:</strong></p>
+          <ol style="margin-bottom:12px;padding-inline-start:18px;line-height:1.7">
+            <li>لا تُدخل بياناتك من روابط واردة في رسائل غير متوقعة — افتح الموقع بنفسك.</li>
+            <li>فعّل المصادقة الثنائية (2FA) حيثما أمكن.</li>
+            <li>استخدم مدير كلمات مرور لإنشاء كلمات مرور قوية وفريدة.</li>
+            <li>تحقق من عنوان المرسل ومرر المؤشر فوق الرابط لرؤية الوجهة الحقيقية.</li>
+            <li>لا تحمّل مرفقات غير متوقعة حتى لو بدت مرسلة من شخص تعرفه.</li>
+          </ol>
+
+          <p><strong>للمؤسسات:</strong></p>
+          <ul style="margin-bottom:8px;padding-inline-start:18px;line-height:1.7">
+            <li>تفعيل سياسات البريد (SPF, DKIM, DMARC).</li>
+            <li>فرض 2FA للحسابات الإدارية والحساسة.</li>
+            <li>حملات توعية دورية ومواد تعليمية بسيطة.</li>
+            <li>توفير آلية تبليغ سهلة عن الرسائل المشبوهة.</li>
+          </ul>
+
+          <h2 id="victim">7 — ماذا تفعل لو ظننت أنك ضحية؟</h2>
+          <p>غيّر كلمات المرور فورًا، فعّل 2FA، راجع النشاطات المالية، وأبلغ الجهة المعنية أو البنك إن استلزم الأمر. لا تقم بالتواصل مع الروابط أو البيانات داخل الرسالة المشبوهة.</p>
+
+          <h2 id="conclusion">8 — خاتمة</h2>
+          <p>التصيّد يعتمد على خداع الناس أكثر من كونه ثغرة تقنية. بالوعي واتباع بعض الممارسات السهلة يمكن تقليل الخطر بشكل كبير. شارك هذه الصفحة مع زملائك وأفراد عائلتك — الوعي يحمي الجميع.</p>
+
+          <footer class="muted">تم إعداد هذا الدليل لغرض التوعية فقط — لا يتضمن تعليمات تقنية قابلة للاستغلال.</footer>
+        </article>
+      </section>
+
+      <aside class="sidebar">
+        <div class="card glossary">
+          <button class="glossary-toggle btn" onclick="toggleGloss()">عرض/إخفاء القاموس</button>
+          <div id="glossBox">
+            <h3 style="color:var(--accent);margin-bottom:8px">القاموس — Glossary</h3>
+            <div class="term"><b>التصيّد الاحتيالي (Phishing)</b><span class="muted">خداع إلكتروني للحصول على معلومات حساسة</span></div>
+            <div class="term"><b>الهندسة الاجتماعية</b><span class="muted">استغلال سلوك الإنسان لخداعه</span></div>
+            <div class="term"><b>2FA (المصادقة الثنائية)</b><span class="muted">خطوة تحقق إضافية عند تسجيل الدخول</span></div>
+            <div class="term"><b>SPF / DKIM / DMARC</b><span class="muted">آليات للتحقق من صحة رسائل البريد ومنع انتحال المرسل</span></div>
+            <div class="term"><b>SMiShing</b><span class="muted">تصيّد عبر الرسائل النصية</span></div>
+            <div class="term"><b>Spear Phishing</b><span class="muted">تصيّد موجه لشخص محدد</span></div>
+            <div class="term"><b>Typosquatting</b><span class="muted">نطاق مشابه يخدع المستخدم</span></div>
+            <div style="margin-top:12px" class="tip"><strong>شارك المعلومة:</strong> نسخة قصيرة للـ caption جاهزة للنسخ: "هل تعرف كيف تميز رسالة التصيّد؟ تعلّم العلامات الأساسية لحماية حساباتك."</div>
+          </div>
+        </div>
+
+        <div style="height:14px"></div>
+      </aside>
+
+    </main>
+  </div>
+
+  <script>
+    // English: small JS helpers for UI interactions
+    function toggleGloss(){
+      var box = document.getElementById('glossBox');
+      if(!box) return;
+      if(box.style.display === 'none') box.style.display = 'block'; else box.style.display = 'none';
+    }
+    function copyCaption(){
+      var text = 'هل تعرف كيف تميز رسالة التصيّد؟ تعلّم العلامات الأساسية لحماية حساباتك وشارك لمن تحب. #أمن_المعلومات #التصيد_الاحتيالي #توعية_سيبرانية';
+      navigator.clipboard && navigator.clipboard.writeText(text).then(function(){
+        var e = document.getElementById('copied'); if(e){e.style.display='block'; setTimeout(()=>e.style.display='none',2500)}
+      });
+    }
+    // Hide glossary on small screens initially
+    (function(){ if(window.innerWidth <= 880){ var b=document.getElementById('glossBox'); if(b) b.style.display='none' } })();
+  </script>
+</body>
+</html>
